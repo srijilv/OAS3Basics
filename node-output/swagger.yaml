@@ -54,6 +54,8 @@ components:
     inline_response_200:
       type: object
       properties:
+        id:
+          format: uuid
         cityCode:
           maxLength: 3
           minLength: 2

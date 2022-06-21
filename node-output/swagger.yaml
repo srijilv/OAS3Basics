@@ -23,4 +23,70 @@ paths:
       responses:
         "200":
           description: List  of customers
-components: {}
+          content:
+            application/json:
+              schema:
+                maxLength: 100
+                minLength: 1
+                type: array
+                description: array to hold customers
+                items:
+                  maxLength: 100
+                  minLength: 1
+                  type: string
+                  description: array items
+        "400":
+          description: Not Found
+        "500":
+          description: Server Error
+  /v1/cities:
+    description: API to Fetch All Cities
+    get:
+      responses:
+        "200":
+          description: List of Cities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+components:
+  schemas:
+    inline_response_200:
+      type: object
+      properties:
+        id:
+          format: uuid
+        cityCode:
+          maxLength: 3
+          minLength: 2
+          type: string
+          example: CLT
+          enum:
+          - CLT
+          - KCH
+          - KNR
+          - MLP
+        cityName:
+          maxLength: 50
+          minLength: 2
+          type: string
+          example: Calicut
+        countryName:
+          maxLength: 100
+          minLength: 2
+          type: string
+          example: India
+        zipCode:
+          maxLength: 6
+          minLength: 5
+          type: integer
+          example: 673633
+        spokenLanguages:
+          type: object
+          properties:
+            primary:
+              type: string
+              example: Malayalam
+            other:
+              type: string
+              example: Tamil

@@ -31,10 +31,7 @@ paths:
                 type: array
                 description: array to hold customers
                 items:
-                  maxLength: 100
-                  minLength: 1
-                  type: string
-                  description: array items
+                  $ref: '#/components/schemas/inline_response_200'
         "400":
           description: Not Found
         "500":
@@ -48,10 +45,49 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_200_1'
 components:
   schemas:
     inline_response_200:
+      type: object
+      properties:
+        id:
+          format: uuid
+        customerId:
+          type: integer
+          format: int32
+          example: 1222
+        customerName:
+          maxLength: 50
+          minLength: 2
+          type: string
+        customerCurrency:
+          maxLength: 3
+          minLength: 3
+          type: string
+          example: USD
+          enum:
+          - USD
+          - CRC
+          - INR
+        transactionCurrency:
+          type: array
+          example:
+          - USD
+          - CRC
+          - INR
+          items:
+            type: string
+            enum:
+            - USD
+            - CRC
+            - INR
+        customerROE:
+          type: number
+          format: float
+          example: 2.23
+      description: customer data
+    inline_response_200_1:
       type: object
       properties:
         id:

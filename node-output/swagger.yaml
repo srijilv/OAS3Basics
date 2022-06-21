@@ -58,15 +58,28 @@ components:
           maxLength: 3
           minLength: 2
           type: string
+          example: CLT
         cityName:
           maxLength: 50
           minLength: 2
           type: string
+          example: Calicut
         countryName:
           maxLength: 100
           minLength: 2
           type: string
+          example: India
         zipCode:
           maxLength: 6
           minLength: 5
           type: integer
+          example: 673633
+        spokenLanguages:
+          type: object
+          properties:
+            primary:
+              type: string
+              example: Malayalam
+            other:
+              type: string
+              example: Tamil

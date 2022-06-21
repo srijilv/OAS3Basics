@@ -61,6 +61,11 @@ components:
           minLength: 2
           type: string
           example: CLT
+          enum:
+          - CLT
+          - KCH
+          - KNR
+          - MLP
         cityName:
           maxLength: 50
           minLength: 2

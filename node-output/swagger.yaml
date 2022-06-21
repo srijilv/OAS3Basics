@@ -23,4 +23,8 @@ paths:
       responses:
         "200":
           description: List  of customers
+        "400":
+          description: Not Found
+        "500":
+          description: Server Error
 components: {}

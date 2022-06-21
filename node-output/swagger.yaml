@@ -39,4 +39,34 @@ paths:
           description: Not Found
         "500":
           description: Server Error
-components: {}
+  /v1/cities:
+    description: API to Fetch All Cities
+    get:
+      responses:
+        "200":
+          description: List of Cities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+components:
+  schemas:
+    inline_response_200:
+      type: object
+      properties:
+        cityCode:
+          maxLength: 3
+          minLength: 2
+          type: string
+        cityName:
+          maxLength: 50
+          minLength: 2
+          type: string
+        countryName:
+          maxLength: 100
+          minLength: 2
+          type: string
+        zipCode:
+          maxLength: 6
+          minLength: 5
+          type: integer

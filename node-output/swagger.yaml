@@ -26,9 +26,15 @@ paths:
           content:
             application/json:
               schema:
+                maxLength: 100
+                minLength: 1
                 type: array
+                description: array to hold customers
                 items:
+                  maxLength: 100
+                  minLength: 1
                   type: string
+                  description: array items
         "400":
           description: Not Found
         "500":

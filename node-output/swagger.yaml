@@ -20,6 +20,27 @@ paths:
   /v1/customers:
     description: All List of customers
     get:
+      parameters:
+      - name: pageNo
+        in: query
+        description: Page No
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageLimit
+        in: query
+        description: Page Limit
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          default: 10
       responses:
         "200":
           description: List  of customers
@@ -39,6 +60,27 @@ paths:
   /v1/cities:
     description: API to Fetch All Cities
     get:
+      parameters:
+      - name: pageNo
+        in: query
+        description: Page No
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageLimit
+        in: query
+        description: Page Limit
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          default: 10
       responses:
         "200":
           description: List of Cities
@@ -148,3 +190,26 @@ components:
           format: float
           example: 2.23
       description: customer data
+  parameters:
+    PageNo:
+      name: pageNo
+      in: query
+      description: Page No
+      required: true
+      style: form
+      explode: true
+      schema:
+        type: integer
+        format: int32
+        default: 1
+    PageLimit:
+      name: pageLimit
+      in: query
+      description: Page Limit
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        format: int32
+        default: 10

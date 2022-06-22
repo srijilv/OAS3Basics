@@ -45,9 +45,70 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
+                $ref: '#/components/schemas/Citylistmin'
 components:
   schemas:
+    SpokenLanguages:
+      type: object
+      properties:
+        primary:
+          type: string
+          example: Malayalam
+        other:
+          type: string
+          example: Tamil
+    Zipcode:
+      maxLength: 6
+      minLength: 5
+      type: integer
+      example: 673633
+    Countryname:
+      maxLength: 100
+      minLength: 2
+      type: string
+      example: India
+    Cityname:
+      maxLength: 50
+      minLength: 2
+      type: string
+      example: Calicut
+    Citycode:
+      maxLength: 3
+      minLength: 2
+      type: string
+      example: CLT
+      enum:
+      - CLT
+      - KCH
+      - KNR
+      - MLP
+    Citymayor:
+      maxLength: 50
+      minLength: 5
+      type: string
+      example: Ravi
+    Citylist:
+      type: object
+      properties:
+        id:
+          format: uuid
+        cityCode:
+          $ref: '#/components/schemas/Citycode'
+        cityName:
+          $ref: '#/components/schemas/Cityname'
+        countryName:
+          $ref: '#/components/schemas/Countryname'
+        zipCode:
+          $ref: '#/components/schemas/Zipcode'
+        spokenLanguages:
+          $ref: '#/components/schemas/SpokenLanguages'
+    Citylistmin:
+      type: object
+      properties:
+        extras:
+          $ref: '#/components/schemas/Citymayor'
+      allOf:
+      - $ref: '#/components/schemas/Citylist'
     inline_response_200:
       type: object
       properties:
@@ -87,42 +148,3 @@ components:
           format: float
           example: 2.23
       description: customer data
-    inline_response_200_1:
-      type: object
-      properties:
-        id:
-          format: uuid
-        cityCode:
-          maxLength: 3
-          minLength: 2
-          type: string
-          example: CLT
-          enum:
-          - CLT
-          - KCH
-          - KNR
-          - MLP
-        cityName:
-          maxLength: 50
-          minLength: 2
-          type: string
-          example: Calicut
-        countryName:
-          maxLength: 100
-          minLength: 2
-          type: string
-          example: India
-        zipCode:
-          maxLength: 6
-          minLength: 5
-          type: integer
-          example: 673633
-        spokenLanguages:
-          type: object
-          properties:
-            primary:
-              type: string
-              example: Malayalam
-            other:
-              type: string
-              example: Tamil

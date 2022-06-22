@@ -23,6 +23,7 @@ paths:
       - Customer
       summary: List of customers
       description: To get all list of customers in the system
+      operationId: getCustomerV1
       parameters:
       - name: pageNo
         in: query
@@ -61,6 +62,7 @@ paths:
       - Customer
       summary: Customer by Customer ID
       description: Get Customer details by using **Customer** ID
+      operationId: getCustomerByIdV1
       parameters:
       - name: customerId
         in: path
@@ -83,6 +85,7 @@ paths:
       - City
       summary: All Cities
       description: API to Fetch All Cities
+      operationId: getCitiesV1
       parameters:
       - name: pageNo
         in: query
@@ -117,6 +120,7 @@ paths:
       - City
       summary: Get City
       description: Get City information based on City ID
+      operationId: getCityByIdV1
       parameters:
       - name: cityId
         in: path

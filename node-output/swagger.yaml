@@ -20,25 +20,81 @@ paths:
   /v1/customers:
     description: All List of customers
     get:
+      parameters:
+      - name: pageNo
+        in: query
+        description: Page No
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageLimit
+        in: query
+        description: Page Limit
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          default: 10
       responses:
         "200":
           description: List  of customers
           content:
             application/json:
               schema:
-                maxLength: 100
-                minLength: 1
-                type: array
-                description: array to hold customers
-                items:
-                  $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/CustomerList'
         "400":
           description: Not Found
         "500":
           description: Server Error
+  /v1/customers/{customerId}:
+    get:
+      description: Get Customer
+      parameters:
+      - name: customerId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Customer Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
   /v1/cities:
     description: API to Fetch All Cities
     get:
+      parameters:
+      - name: pageNo
+        in: query
+        description: Page No
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageLimit
+        in: query
+        description: Page Limit
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          default: 10
       responses:
         "200":
           description: List of Cities
@@ -109,7 +165,7 @@ components:
           $ref: '#/components/schemas/Citymayor'
       allOf:
       - $ref: '#/components/schemas/Citylist'
-    inline_response_200:
+    Customer:
       type: object
       properties:
         id:
@@ -148,3 +204,33 @@ components:
           format: float
           example: 2.23
       description: customer data
+    CustomerList:
+      maxLength: 100
+      minLength: 1
+      type: array
+      description: array to hold customers
+      items:
+        $ref: '#/components/schemas/Customer'
+  parameters:
+    PageNo:
+      name: pageNo
+      in: query
+      description: Page No
+      required: true
+      style: form
+      explode: true
+      schema:
+        type: integer
+        format: int32
+        default: 1
+    PageLimit:
+      name: pageLimit
+      in: query
+      description: Page Limit
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        format: int32
+        default: 10

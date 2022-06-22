@@ -18,8 +18,12 @@ servers:
   description: Sandbox
 paths:
   /v1/customers:
-    description: All List of customers
     get:
+      tags:
+      - Customer
+      summary: List of customers
+      description: To get all list of customers in the system
+      operationId: getCustomerV1
       parameters:
       - name: pageNo
         in: query
@@ -54,7 +58,11 @@ paths:
           description: Server Error
   /v1/customers/{customerId}:
     get:
-      description: Get Customer
+      tags:
+      - Customer
+      summary: Customer by Customer ID
+      description: Get Customer details by using **Customer** ID
+      operationId: getCustomerByIdV1
       parameters:
       - name: customerId
         in: path
@@ -72,8 +80,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Customer'
   /v1/cities:
-    description: API to Fetch All Cities
     get:
+      tags:
+      - City
+      summary: All Cities
+      description: API to Fetch All Cities
+      operationId: getCitiesV1
       parameters:
       - name: pageNo
         in: query
@@ -102,6 +114,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Citylistmin'
+  /v1/cities/{cityId}:
+    get:
+      tags:
+      - City
+      summary: Get City
+      description: Get City information based on City ID
+      operationId: getCityByIdV1
+      parameters:
+      - name: cityId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Found City
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
 components:
   schemas:
     SpokenLanguages:
@@ -143,7 +178,7 @@ components:
       minLength: 5
       type: string
       example: Ravi
-    Citylist:
+    City:
       type: object
       properties:
         id:
@@ -158,13 +193,20 @@ components:
           $ref: '#/components/schemas/Zipcode'
         spokenLanguages:
           $ref: '#/components/schemas/SpokenLanguages'
+    Citylist:
+      maxLength: 100
+      minLength: 1
+      type: array
+      description: array to hold cities
+      items:
+        $ref: '#/components/schemas/City'
     Citylistmin:
       type: object
       properties:
         extras:
           $ref: '#/components/schemas/Citymayor'
       allOf:
-      - $ref: '#/components/schemas/Citylist'
+      - $ref: '#/components/schemas/City'
     Customer:
       type: object
       properties:

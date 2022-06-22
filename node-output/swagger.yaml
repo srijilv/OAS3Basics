@@ -18,8 +18,9 @@ servers:
   description: Sandbox
 paths:
   /v1/customers:
-    description: All List of customers
     get:
+      summary: List of customers
+      description: To get all list of customers in the system
       parameters:
       - name: pageNo
         in: query
@@ -54,7 +55,8 @@ paths:
           description: Server Error
   /v1/customers/{customerId}:
     get:
-      description: Get Customer
+      summary: Customer by Customer ID
+      description: Get Customer details by using **Customer** ID
       parameters:
       - name: customerId
         in: path
@@ -72,8 +74,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Customer'
   /v1/cities:
-    description: API to Fetch All Cities
     get:
+      summary: All Cities
+      description: API to Fetch All Cities
       parameters:
       - name: pageNo
         in: query

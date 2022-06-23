@@ -282,6 +282,7 @@ components:
       properties:
         id:
           format: uuid
+          readOnly: true
         customerId:
           type: integer
           format: int32

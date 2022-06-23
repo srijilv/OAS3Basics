@@ -53,9 +53,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomerList'
         "400":
-          description: Not Found
-        "500":
-          description: Server Error
+          description: Bad Request
+        "409":
+          description: Conflict
     post:
       tags:
       - Customer
@@ -116,6 +116,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Customer'
+        "404":
+          description: Not Found
     put:
       tags:
       - Customer
@@ -141,6 +143,8 @@ paths:
       responses:
         "203":
           description: Customer Updated
+        "404":
+          description: Not Found
     delete:
       tags:
       - Customer
@@ -164,6 +168,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PostResponse'
+        "404":
+          description: Not Found
   /v1/cities:
     get:
       tags:

@@ -114,6 +114,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Customer'
+    put:
+      tags:
+      - Customer
+      summary: Update customer
+      description: API to update the customer data.
+      parameters:
+      - name: customerId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: Customer Data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        "203":
+          description: Customer Updated
   /v1/cities:
     get:
       tags:
@@ -207,6 +230,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/City'
+    put:
+      tags:
+      - City
+      summary: Update City
+      description: API to update the City data
+      parameters:
+      - name: cityId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: City Info
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/City'
+      responses:
+        "203":
+          description: City Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostResponse'
 components:
   schemas:
     SpokenLanguages:
@@ -333,6 +383,24 @@ components:
         id:
           format: uuid
   parameters:
+    CustomerId:
+      name: customerId
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+        format: uuid
+    CityId:
+      name: cityId
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+        format: uuid
     PageNo:
       name: pageNo
       in: query

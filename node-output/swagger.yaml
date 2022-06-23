@@ -18,6 +18,7 @@ servers:
   description: Sandbox server (uses test data)
 security:
 - BasicAuth: []
+- JWTAuthToken: []
 paths:
   /v1/customers:
     get:
@@ -58,6 +59,7 @@ paths:
           description: Bad Request
         "409":
           description: Conflict
+      security: []
     post:
       tags:
       - Customer
@@ -570,3 +572,7 @@ components:
     BasicAuth:
       type: http
       scheme: basic
+    JWTAuthToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

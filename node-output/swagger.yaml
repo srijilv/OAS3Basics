@@ -12,10 +12,10 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: "1.0"
 servers:
-- url: www.dev-example.com
-  description: Development
-- url: www.sandbox-example.com
-  description: Sandbox
+- url: https://api.example.com/v1
+  description: Production server (uses live data)
+- url: https://sandbox-api.example.com:8443/v1
+  description: Sandbox server (uses test data)
 paths:
   /v1/customers:
     get:
@@ -61,6 +61,7 @@ paths:
       - Customer
       summary: Create a Customer
       description: To create a new customer
+      operationId: createCustomerV1
       requestBody:
         description: New Customer
         content:
@@ -101,6 +102,7 @@ paths:
       parameters:
       - name: customerId
         in: path
+        description: Customer ID
         required: true
         style: simple
         explode: false
@@ -119,9 +121,11 @@ paths:
       - Customer
       summary: Update customer
       description: API to update the customer data.
+      operationId: updateCustomerV1
       parameters:
       - name: customerId
         in: path
+        description: Customer ID
         required: true
         style: simple
         explode: false
@@ -137,6 +141,29 @@ paths:
       responses:
         "203":
           description: Customer Updated
+    delete:
+      tags:
+      - Customer
+      summary: Delete Customer
+      description: API to delete customer data
+      operationId: deleteCustomerV1
+      parameters:
+      - name: customerId
+        in: path
+        description: Customer ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Customer Deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostResponse'
   /v1/cities:
     get:
       tags:
@@ -177,6 +204,7 @@ paths:
       - City
       summary: Create City
       description: API to create new city
+      operationId: createCityV1
       requestBody:
         description: POST DATA
         content:
@@ -217,6 +245,7 @@ paths:
       parameters:
       - name: cityId
         in: path
+        description: City ID.
         required: true
         style: simple
         explode: false
@@ -235,9 +264,11 @@ paths:
       - City
       summary: Update City
       description: API to update the City data
+      operationId: updateCityV1
       parameters:
       - name: cityId
         in: path
+        description: City ID.
         required: true
         style: simple
         explode: false
@@ -253,6 +284,29 @@ paths:
       responses:
         "203":
           description: City Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostResponse'
+    delete:
+      tags:
+      - City
+      summary: Delete City
+      description: API to delete City
+      operationId: deleteCityV1
+      parameters:
+      - name: cityId
+        in: path
+        description: City ID.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: City Deleted
           content:
             application/json:
               schema:
@@ -386,6 +440,7 @@ components:
     CustomerId:
       name: customerId
       in: path
+      description: Customer ID
       required: true
       style: simple
       explode: false
@@ -395,6 +450,7 @@ components:
     CityId:
       name: cityId
       in: path
+      description: City ID.
       required: true
       style: simple
       explode: false

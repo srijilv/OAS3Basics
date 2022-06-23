@@ -16,6 +16,9 @@ servers:
   description: Production server (uses live data)
 - url: https://sandbox-api.example.com:8443/v1
   description: Sandbox server (uses test data)
+security:
+- BasicAuth: []
+- JWTAuthToken: []
 paths:
   /v1/customers:
     get:
@@ -56,6 +59,7 @@ paths:
           description: Bad Request
         "409":
           description: Conflict
+      security: []
     post:
       tags:
       - Customer
@@ -564,3 +568,11 @@ components:
         type: integer
         format: int32
         default: 10
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    JWTAuthToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

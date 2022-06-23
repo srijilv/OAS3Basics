@@ -71,6 +71,22 @@ paths:
       responses:
         "201":
           description: Customer created
+          headers:
+            Location:
+              description: Location of the created customer
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: URI
+                example: "http://example.com/v1/customers/{assignedIdValue}"
+            Date:
+              description: Date of the created customer
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: date-time
           content:
             application/json:
               schema:
@@ -148,6 +164,22 @@ paths:
       responses:
         "201":
           description: City Created
+          headers:
+            Location:
+              description: Location of created city
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: URI
+                example: http://example.com/v1/cities
+            Date:
+              description: Date time of city created
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: date-time
           content:
             application/json:
               schema:

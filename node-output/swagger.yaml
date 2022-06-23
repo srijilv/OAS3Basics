@@ -16,6 +16,8 @@ servers:
   description: Production server (uses live data)
 - url: https://sandbox-api.example.com:8443/v1
   description: Sandbox server (uses test data)
+security:
+- BasicAuth: []
 paths:
   /v1/customers:
     get:
@@ -564,3 +566,7 @@ components:
         type: integer
         format: int32
         default: 10
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

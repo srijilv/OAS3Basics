@@ -170,6 +170,55 @@ paths:
                 $ref: '#/components/schemas/PostResponse'
         "404":
           description: Not Found
+  /v1/customers/{customerId}/orders:
+    post:
+      tags:
+      - Orders
+      summary: Customer Order
+      description: Customer order details
+      parameters:
+      - name: customerId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: Order Details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerOrder'
+      responses:
+        "200":
+          description: Customer order placed
+      callbacks:
+        orderStatusUpdate:
+          '{request.body#/customerCallBackUrl}':
+            description: Update the status of the order
+            post:
+              summary: Update order status
+              description: Update the status of the order
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        orderId:
+                          type: string
+                          format: uuid
+                        orderStatus:
+                          type: string
+              responses:
+                "200":
+                  description: Order updated.
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/PostResponse'
   /v1/cities:
     get:
       tags:
@@ -442,6 +491,36 @@ components:
           example: Success
         id:
           format: uuid
+    Order:
+      type: object
+      properties:
+        orderId:
+          type: string
+          format: uuid
+        orderName:
+          type: string
+        orderQuantiy:
+          type: integer
+          default: 1
+        orderAmount:
+          type: number
+          format: float
+      description: Order
+    CustomerOrder:
+      type: object
+      properties:
+        customerId:
+          type: string
+          format: uuid
+        customerReference:
+          type: string
+        customerCallBackUrl:
+          type: string
+          format: uri
+        Orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
   parameters:
     CustomerId:
       name: customerId

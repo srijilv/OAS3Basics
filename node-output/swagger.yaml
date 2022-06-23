@@ -56,6 +56,25 @@ paths:
           description: Not Found
         "500":
           description: Server Error
+    post:
+      tags:
+      - Customer
+      summary: Create a Customer
+      description: To create a new customer
+      requestBody:
+        description: New Customer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      responses:
+        "201":
+          description: Customer created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostResponse'
   /v1/customers/{customerId}:
     get:
       tags:
@@ -114,6 +133,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Citylistmin'
+    post:
+      tags:
+      - City
+      summary: Create City
+      description: API to create new city
+      requestBody:
+        description: POST DATA
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/City'
+        required: true
+      responses:
+        "201":
+          description: City Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostResponse'
   /v1/cities/{cityId}:
     get:
       tags:
@@ -253,6 +291,14 @@ components:
       description: array to hold customers
       items:
         $ref: '#/components/schemas/Customer'
+    PostResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: Success
+        id:
+          format: uuid
   parameters:
     PageNo:
       name: pageNo
